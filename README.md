@@ -176,3 +176,149 @@ ggplot(World_happ) +
 ```
 
 ![](images/worldlack.png "")
+
+## Europe
+
+```{r}
+EU <- read_sf("Europe.shp")
+head(EU)
+```
+
+```{r}
+Happ_eu <- Happiness[Happiness$Country.or.region %in% EU$NAME[
+  EU$NAME %in% Happiness$Country.or.region],]
+NA_rows <- as.data.frame(matrix(NA,nrow=13,ncol=9))
+names(NA_rows) <- names(Happ_eu)
+Happ_eu <- rbind(Happ_eu,NA_rows)
+```
+
+```{r}
+EU_happ <- cbind(EU,Happ_eu[match(EU$NAME,Happ_eu$Country.or.region),])
+```
+
+```{r}
+EU_happ[EU_happ$NAME=="Bosnia Herzegovina",] <- cbind(EU_happ[
+  EU_happ$NAME=="Bosnia Herzegovina",c(1:2)],Happiness[
+    Happiness$Country.or.region=="Bosnia and Herzegovina",])
+EU_happ[EU_happ$NAME=="Macedonia",] <- cbind(EU_happ[
+  EU_happ$NAME=="Macedonia",c(1:2)],Happiness[
+    Happiness$Country.or.region=="North Macedonia",])
+```
+
+#### Happniess score
+
+```{r}
+ggplot(EU_happ) +
+  geom_sf(aes(fill = Score)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28),
+        text = element_text(size = 28))+
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(4.2,8))+
+    guides(fill=guide_legend(title="Happiness score"))
+```
+
+![](images/euscore.png "")
+
+#### GDP per capita
+
+```{r}
+ggplot(EU_happ) +
+  geom_sf(aes(fill = GDP.per.capita)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28),
+        text = element_text(size = 28))+
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0.5,1.8))+
+  guides(fill=guide_legend(title="GDP"))
+```
+
+![](images/eugdp.png "")
+
+#### Social support
+
+```{r}
+ggplot(EU_happ) +
+  geom_sf(aes(fill = Social.support)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28),
+        text = element_text(size = 28))+
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0.6,1.7))+
+  guides(fill=guide_legend(title="Social support"))
+```
+
+![](images/eusocial.png "")
+
+#### Life expectancy
+
+```{r}
+ggplot(EU_happ) +
+  geom_sf(aes(fill = Healthy.life.expectancy)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28),
+        text = element_text(size = 28))+
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0.7,1.1))+
+  guides(fill=guide_legend(title="Life expectancy"))
+```
+
+![](images/eulife.png "")
+
+#### Freedom
+
+```{r}
+ggplot(EU_happ) +
+  geom_sf(aes(fill = Freedom.to.make.life.choices)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28),
+        text = element_text(size = 28))+
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0.05,0.65))+
+  guides(fill=guide_legend(title="Freedom"))
+```
+
+![](images/eufreedom.png "")
+
+#### Generosity
+
+```{r}
+ggplot(EU_happ) +
+  geom_sf(aes(fill = Generosity)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28),
+        text = element_text(size = 28))+
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0,0.4))+
+  guides(fill=guide_legend(title="Generosity"))
+```
+
+![](images/eugener.png "")
+
+#### Lack of corruption
+
+```{r}
+ggplot(EU_happ) +
+  geom_sf(aes(fill = Perceptions.of.corruption)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28),
+        text = element_text(size = 28))+
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0,0.42))+
+  guides(fill=guide_legend(title="Lack of corruption"))
+```
+![](images/eulack.png "")
