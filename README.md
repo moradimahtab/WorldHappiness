@@ -81,3 +81,98 @@ ggplot(World_happ) +
 
 
 ![](images/worldscore.png "")
+
+####  GDP per capita
+
+```{r}
+library(ggplot2)
+ggplot(World_happ) +
+  geom_sf(aes(fill = GDP.per.capita)) +
+  theme(axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28))+   
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0,1.7))+
+  guides(fill=guide_legend(title="GDP"))
+```
+
+![](images/worldgdp.png "")
+
+#### Social support
+
+```{r}
+ggplot(World_happ) +
+  geom_sf(aes(fill = Social.support)) +
+  theme(axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28))+   
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0,1.7))+
+  guides(fill=guide_legend(title="Social support"))
+```
+
+![](images/worldsocial.png "")
+
+#### Life expectancy
+
+```{r}
+ggplot(World_happ) +
+  geom_sf(aes(fill = Healthy.life.expectancy)) +
+  theme(axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28))+ 
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0,1.2))+
+  guides(fill=guide_legend(title="Life expectancy"))
+```
+
+![](images/worldlife.png "")
+
+#### Freedom 
+
+```{r}
+ggplot(World_happ) +
+  geom_sf(aes(fill = Freedom.to.make.life.choices)) +
+  theme(axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28))+ 
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0,0.7))+
+  guides(fill=guide_legend(title="Freedom"))
+```
+![](images/worldfreedom.png "")
+
+##### Generosity
+
+```{r}
+ggplot(World_happ) +
+  geom_sf(aes(fill = Generosity)) +
+  theme(axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28))+
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0,0.6))+
+  guides(fill=guide_legend(title="Generosity"))
+```
+![](images/worldgener.png "")
+
+##### Lack of corruption
+
+```{r}
+ggplot(World_happ) +
+  geom_sf(aes(fill = Perceptions.of.corruption)) +
+  theme(axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28))+ 
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0,0.5))+
+  guides(fill=guide_legend(title="Lack of corruption"))
+```
+
+![](images/worldlack.png "")
