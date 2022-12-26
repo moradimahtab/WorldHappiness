@@ -13,7 +13,6 @@ Note: Countries appeared in grey are those we have no data for.
 
 ```{r}
 Happiness <- read.csv("2019.csv",sep = ";")
-head(Happiness)
 ```
 
 ```{r,warning=FALSE,message=FALSE}
@@ -22,7 +21,6 @@ library(sf)
 
 ```{r}
 World <- read_sf("World_Countries.shp")
-head(World)
 ```
 
 There are some countries in the maps which are not included in the happiness report, below we extract the list of such countries.
