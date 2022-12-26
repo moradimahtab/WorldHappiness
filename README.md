@@ -322,3 +322,148 @@ ggplot(EU_happ) +
   guides(fill=guide_legend(title="Lack of corruption"))
 ```
 ![](images/eulack.png "")
+
+
+## South America
+
+```{r}
+SA <- read_sf("South_America.shp")
+head(SA)
+```
+
+```{r}
+SA$COUNTRY[!SA$COUNTRY %in% Happiness$Country.or.region]
+```
+
+```{r}
+Happ_SA <- Happiness[Happiness$Country.or.region %in% SA$COUNTRY[
+  SA$COUNTRY %in% Happiness$Country.or.region],]
+NA_rows <- as.data.frame(matrix(NA,nrow=13,ncol=9))
+names(NA_rows) <- names(Happ_SA)
+Happ_SA <- rbind(Happ_SA,NA_rows)
+
+```
+
+```{r}
+SA_happ <- cbind(SA,Happ_SA[match(SA$COUNTRY,Happ_SA$Country.or.region),])
+```
+
+#### Happniess score
+
+```{r}
+ggplot(SA_happ) +
+  geom_sf(aes(fill = Score)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28),
+        text = element_text(size = 28))+
+  scale_fill_gradientn(colours = terrain.colors(100),limits = c(4.6,6.5))+
+  guides(fill=guide_legend(title="Happiness score"))
+```
+
+![](images/sascore.png "")
+
+#### GDP per capita
+
+```{r}
+ggplot(SA_happ) +
+  geom_sf(aes(fill = GDP.per.capita)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28),
+        text = element_text(size = 28))+
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0.7,1.6))+
+  guides(fill=guide_legend(title="GDP"))
+```
+
+![](images/sagdp.png "")
+
+#### Social support
+
+```{r}
+ggplot(SA_happ) +
+  geom_sf(aes(fill = Social.support)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28),
+        text = element_text(size = 28))+
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(1.1,1.5))+
+  guides(fill=guide_legend(title="Social support"))
+```
+
+![](images/sasocial.png "")
+
+#### Life expectancy
+
+```{r}
+ggplot(SA_happ) +
+  geom_sf(aes(fill = Healthy.life.expectancy)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28),
+        text = element_text(size = 28))+
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0.6,0.95))+
+  guides(fill=guide_legend(title="Life expectancy"))
+```
+
+![](images/salife.png "")
+
+#### Freedom
+
+```{r}
+ggplot(SA_happ) +
+  geom_sf(aes(fill = Freedom.to.make.life.choices)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28),
+        text = element_text(size = 28))+
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0.13,0.55))+
+  guides(fill=guide_legend(title="Freedom"))
+```
+
+![](images/safreedom.png "")
+
+#### Generosity
+
+```{r}
+ggplot(SA_happ) +
+  geom_sf(aes(fill = Generosity)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28),
+        text = element_text(size = 28))+
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0.05,0.19))+
+  guides(fill=guide_legend(title="Generosity"))
+```
+
+![](images/sagener.png "")
+
+#### Lack of corruption
+
+```{r}
+ggplot(SA_happ) +
+  geom_sf(aes(fill = Perceptions.of.corruption)) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        legend.position="bottom",
+        legend.title=element_text(size=28), 
+        legend.text=element_text(size=28),
+        text = element_text(size = 28))+ 
+  scale_fill_gradientn(colours = terrain.colors(100),limits=c(0.02,0.16))+
+  guides(fill=guide_legend(title="Lack of corruption"))
+```
+
+![](images/salack.png "")
+
